@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Webpack Starter Kit</title>
+    <meta charset="utf-8">
+    <title>Travel Tracker</title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h1>Webpack Starter Kit</h1>
+    <header>
+      <h1>Travel Tracker <img src="" alt=""></h1>
+      <button class="sign-in-btn" for="signing-in">Sign In</button>
+    </header>
+    <div class="">
+      <section class="welcome-message">
+      </section>
+      <section class="current-location">
+        Current Location: Home
+      </section>
+      <section class="pending-trips">
+        Pending-Trips
+      </section>
+      <section class="total-amount-spent-year">
+        Total Spent This Year
+      </section>
+    </div>
+    <main class="main-page">
+      <section class= "user-section">
+        <form id="book-trip-form" action="book-trip">
+          <h2>Book a Trip</h2>
+          <label for="date-picker">Departure</label>
+        <input id="trip-date" type="date">
+          <label for="destination-input">Destination</label>
+          <label for="amount-of-days">Number of Days</label>
+        <input id="amount-of-days-input" type="number">
+          <label for="amount-of-travelers">Number of Travelers</label>
+        <input id="amount-of-travelers-input" type="number">
+          <div class="trip-estimate">
+            </div>
+          <button class="button trip-estimate-btn"
+                 disabled = disabled
+                 type="button"
+                 name="button"
+                 aria-label="Get trip estimate"
+                 aria-controls="search-input">
+            Get Estimate
+          </button>
+          <button class="button book-trip-btn"
+                  disabled = disabled
+                  type="button"
+                  name="button"
+                  aria-label="Submit trip request"
+                  aria-controls="search-input">
+            Submit
+          </button>
+        </form>
+      </section>
+    </main>
 
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+
+
 
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
