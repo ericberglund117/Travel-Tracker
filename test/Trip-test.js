@@ -5,6 +5,7 @@ import Trip from '../src/trip'
 describe('Trip', function() {
   let tripInfo;
   let trip;
+  let destinationInfo;
 
   beforeEach(function() {
     tripInfo = [
@@ -30,6 +31,16 @@ describe('Trip', function() {
       },
     ];
     trip = new Trip(tripInfo[1])
+    destinationInfo = destinationInfo = [
+      {
+      "id": 25,
+      "destination": "Paris, France",
+      "estimatedLodgingCostPerDay": 50,
+      "estimatedFlightCostPerPerson": 500,
+      "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+      "alt": "overview of city buildings with a clear sky"
+      }
+    ];
   });
 
   describe('Properties and functionality', function() {
@@ -71,6 +82,12 @@ describe('Trip', function() {
 
     it('should start with no suggested activities', function() {
       expect(trip.suggestedActivities).to.eql([])
+    });
+  });
+
+  describe('getTripCost', function() {
+    it('should be able to calculate the cost of a trip request', function() {
+      expect(trip.getTripCost(destinationInfo)).to.equal(1485)
     });
   })
 })
