@@ -15,6 +15,7 @@ import './images/turing-logo.png'
 let travelerData;
 let tripData;
 let destinationData;
+let traveler;
 
 //____query selectors________
 let signInButton = document.querySelector(".sign-in-btn")
@@ -28,6 +29,7 @@ let yearlyAmountSpent = document.querySelector(".total-amount-spent-year")
 signInButton.addEventListener('click')
 estimateButton.addEventListener('click')
 submitTripButton.addEventListener('click')
+estimateButton.addEventListener('click')
 
 function getAllFetchData() {
   let travelerData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers')
@@ -59,3 +61,7 @@ getAllFetchData().then(data => {
   destinationData = data.destinationData
 })
   .catch(error => console.log(error.message))
+
+function getTraveler() {
+  let searched
+}
