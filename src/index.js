@@ -5,6 +5,7 @@
 import domUpdates from './domUpdates';
 import moment from 'moment';
 import Traveler from './traveler';
+import Trip from './trip'
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 
@@ -15,6 +16,18 @@ let travelerData;
 let tripData;
 let destinationData;
 
+//____query selectors________
+let signInButton = document.querySelector(".sign-in-btn")
+let estimateButton = document.querySelector(".trip-estimate-btn")
+let submitTripButton = document.querySelector(".book-trip-btn")
+let currentTravelerLocation = document.querySelector(".current-location")
+let currentTravelerPendingTrips = document.querySelector(".pending-trips")
+let yearlyAmountSpent = document.querySelector(".total-amount-spent-year")
+
+//_________event listeners____________
+signInButton.addEventListener('click')
+estimateButton.addEventListener('click')
+submitTripButton.addEventListener('click')
 
 function getAllFetchData() {
   let travelerData = fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers')
@@ -39,3 +52,10 @@ function getAllFetchData() {
     })
     .catch(error => console.log(error.message));
 }
+
+getAllFetchData().then(data => {
+  travelerData = data.travelerData;
+  tripData = data.tripData
+  destinationData = data.destinationData
+})
+  .catch(error => console.log(error.message))
