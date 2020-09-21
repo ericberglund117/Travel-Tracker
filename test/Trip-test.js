@@ -41,5 +41,36 @@ describe('Trip', function() {
     expect(trip).to.be.an.instanceof(Trip);
     });
 
+    it('should have an id', function() {
+    expect(trip.id).to.equal(2);
+    });
+
+    it(`should have a user's id`, function() {
+      expect(trip.userID).to.equal(1)
+    });
+
+    it('should have a destination ID', function() {
+      expect(trip.destinationID).to.equal(25)
+    });
+
+    it('should have a number of travelers', function() {
+      expect(trip.travelers).to.equal(2)
+    });
+
+    it('should have a start date for the trip', function() {
+      expect(trip.date).to.equal("2020/10/04")
+    });
+
+    it('should have a duration of the trip in days', function() {
+      expect(trip.duration).to.equal(7)
+    });
+
+    it('should have a default trip status of pending', function() {
+      expect(trip.status).to.equal('pending')
+    });
+
+    it('should start with no suggested activities', function() {
+      expect(trip.suggestedActivities).to.eql([])
+    });
   })
 })
