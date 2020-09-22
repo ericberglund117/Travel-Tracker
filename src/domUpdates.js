@@ -1,4 +1,5 @@
 import querySelectorNodes from "./index";
+import Traveler from "./traveler"
 
 let domUpdates = {
 
@@ -8,12 +9,12 @@ let domUpdates = {
   },
 
   welcomeTraveler(traveler) {
-    let firstName = currentTraveler.name.split(" ")[0];
+    let firstName = traveler.name.split(" ")[0];
     let welcomeMsg = `
       <div class="welcome-msg">
         <h1>Welcome ${firstName}!</h1>
       </div>`;
-    document.querySelector(".travel-tracker-header").insertAdjacentHTML("afterbegin",
+    document.querySelector(".travel-tracker-header").insertAdjacentHTML("beforeend",
     welcomeMsg)
   },
 
@@ -33,8 +34,8 @@ let domUpdates = {
   },
 
   displayAmountSpent(traveler, tripData, destinations) {
-   let amountSpent = traveler.getAmountSpent(tripData, destinationData);
-   yearlyAmountSpent.innerHtml(`<h2>You spent $${amountSpent} on traveling this year!</h2>`);
+   let amountSpent = traveler.getAmountSpent(tripData, destinations);
+   querySelectorNodes.yearlyAmountSpent.innerHTML = (`<h3>You spent $${amountSpent} on traveling this year!</h3>`);
  },
 
  displayDestinationCards(travler) {
