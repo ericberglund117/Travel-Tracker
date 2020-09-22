@@ -7,53 +7,77 @@
   </head>
   <body>
     <header>
-      <h1>Travel Tracker <img src="" alt=""></h1>
+      <h1 class="travel-tracker-header">Travel Tracker <img src="" alt=""></h1>
       <button class="sign-in-btn" for="signing-in">Sign In</button>
     </header>
-      <section class= "traveler-section">
-        <div class="welcome-section">
-          <h2 class= "welcome-message">Welcome!</h2>
-        </div>
-        <form id="book-trip-form" action="book-trip">
-          <h2>Book a Trip</h2>
-          <label for="date-picker">Departure</label>
-          <input id="trip-date" type="date">
-          <label for="destination-input">Destination</label>
-          <label for="amount-of-days">Number of Days</label>
-          <input id="amount-of-days-input" type="number">
-          <label for="amount-of-travelers">Number of Travelers</label>
-          <input id="amount-of-travelers-input" type="number">
-          <div class="trip-estimate">
-          </div>
-          <button class="button trip-estimate-btn"
-          type="button"
-          name="button"
-          aria-label="Get trip estimate"
-          aria-controls="search-input">
-          Get Estimate
-          </button>
-          <button class="button book-trip-btn"
-          type="button"
-          name="button"
-          aria-label="Submit trip request"
-          aria-controls="search-input">
-          Submit
-          </button>
-        </form>
+    <main class="main-page">
+      <section class="welcome-msg">
       </section>
-      <div class="traveler-information">
-        <section class="welcome-message">
-        </section>
-        <section class="current-location">
-          Current Location: Home
-        </section>
-        <section class="pending-trips">
-          Pending-Trips
-        </section>
-        <section class="total-amount-spent-year">
-          Total Spent This Year
-        </section>
-      </div>
+      <section class="monetary-display">
+      </section>
+      <section class="current-trip">
+      </section>
+      <section class="left-section hidden">
+        <form id="book-trip-form"
+            role="search">
+            <h3>Book a Trip!</h3>
+            <label for="date-picker">
+              Departure Date
+            </label>
+        <input id="trip-date"
+               type="date"
+               autocomplete="off"></input>
+             <label for="destination-input">
+               Destination
+             </label>
+             <select class="destination-dropdown"
+                     name="">
+             </select>
+             <label for="number-days">
+               Number of Days
+             </label>
+        <input id="number-days-input"
+              type="number"
+              autocomplete="off"></input>
+            <label for="number-days">
+              Number of Travelers
+            </label>
+      <input id="number-travelers-input"
+             type="number"
+             autocomplete="off"></input>
+            <div class="trip-estimate">
+            </div>
+        <button class="button trip-estimate-btn"
+               disabled = disabled
+               type="button"
+               name="button"
+               aria-label="Get trip estimate"
+               aria-controls="search-input">
+          Get Estimate
+        </button>
+        <button class="button book-trip-btn"
+                disabled = disabled
+                type="button"
+                name="button"
+                aria-label="Submit trip request"
+                aria-controls="search-input">
+          Submit
+        </button>
+      </form>
+      </section>
+      <section class="upcoming-trips hidden">
+        <h3>Upcoming Trips</h3>
+      </section>
+      <section class="trip-requests-all hidden">
+        <h3>Pending Trip Requests</h3>
+      </section>
+      <section class="pending-trips hidden">
+        <h3>Trip Requests</h3>
+      </section>
+      <section class="past-trips hidden">
+        <h3>Past Trips</h3>
+      </section>
+    </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
