@@ -38,106 +38,43 @@ let fetcher = {
     domUpdates.displayPendingTrips(traveler, domUpdates.allDestinations);
   },
 
-  travelerRequestedTripPost() {
-    if (querySelectorNodes.tripDepartureDate.value && querySelectorNodes.numberOfDaysInput.value && querySelectorNodes.numberOfTravelersInput) {
+  travelerRequestedTripPost(destinationIdentification) {
+    if (querySelectorNodes.tripDepartureDate.value && querySelectorNodes.numberOfDaysInput.value && querySelectorNodes.numberOfTravelersInput.value) {
       fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips',
       {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(this.createTrip())
+        body: JSON.stringify(this.createTrip(destinationIdentification))
       })
       .then(response => console.log(response))
-      .then(response => this.getTravelerData(domUpdates.user.id))
+      //.then(response => this.getTravelerData(domUpdates.traveler.id))
+      .then(domUpdates.displayTripConfirmation())
       .catch(error => console.log(error))
       } else {
-        alert('Something is invalid, please try again')
+        domUpdates.displayTripError()
       }
     },
 
-  createTrip(){
+  createTrip(destinationIdentification){
     if (querySelectorNodes.tripDepartureDate.value && querySelectorNodes.numberOfDaysInput.value && querySelectorNodes.numberOfTravelersInput) {
       let requestedDestination = domUpdates.allDestinations.find(destination => {
-        return destination.destination === selectDestination(event)
+        return destination.id === destinationIdentification
       });
       let mostRecentTripRequest = domUpdates.allTrips.pop();
       let requestedTrip = {
         id: mostRecentTripRequest.id + 4,
-        userID: parseInt(domUpdates.user.id),
-        destinationID: parseInt(destination.id),
+        userID: parseInt(domUpdates.traveler.id),
+        destinationID: parseInt(requestedDestination.id),
         travelers: parseInt(querySelectorNodes.numberOfTravelersInput.value),
-        date: moment(querySelectorNodes.tripDepartureDate.value).format('YYYY/MM/DD'),
+        date: moment(querySelectorNodes.tripDepartureDate, 'YYYY-MM-DD'),
         duration: parseInt(querySelectorNodes.numberOfDaysInput.value),
         status: 'pending',
-        suggestedActivities: [],
+        suggestedActivities: []
       }
-      domUpdates.displayTripEstimation(requestedTrip, destination)
+      domUpdates.displayTripEstimation(requestedTrip, requestedDestination)
       return requestedTrip
     }
   }
 }
-
-  //
-  // getSingleTraveler(traveler) {
-  //   return fetch(`https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/travelers/travelers/${traveler.id}`)
-  //   .then((response) => response.json())
-  //   .then(data => traveler = new Traveler(data))
-  //   .then(this.getTravelerTrips(traveler))
-  //   .catch(error => console.log(error));
-  // },
-  //
-  // getTravelerTrips(traveler) {
-  //   let allTravelerTrips;
-  //   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips')
-  //   .then((response) => response.json())
-  //   .then(data => allTravelerTrips = data)
-  //   .then(() => {
-  //     let travelerTrips = allTravelerTrips.trips.filter(trip => {
-  //       return trip.userID === traveler.id;
-  //     })
-  //     traveler.allDestinations = allDestinations;
-  //     traveler.trips = travelerTrips;
-  //     this.useFetchData(traveler)
-  //   })
-  //   .catch(error => console.log(error));
-  // },
-  //
-  // checkData() {
-  //   Promise.all([getSingleTraveler(), getTravelerTrips(), getTravelerDestinationData()])
-  //   .then(data => console.log(allData))
-  //   .catch(error => console.log(error));
-  // },
-  //
-  // travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, selectedDestination ) {
-  //   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       let allTrips = data;
-  //     })
-  //     .then(() => {
-  //       let tripRequest = {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-type': 'application/json'
-  //         },
-  //       body: JSON.stringify({
-  //         id:(allTrips.trips.length + 1),
-  //         userID: userID,
-  //         destinationID: selectedDestination,
-  //         travelers: parseInt(numberOfTravelersInput.value),
-  //         date: moment(tripDepartureDate, 'YYYY/MM/DD'),
-  //         status: 'pending',
-  //         suggestedActivities: []
-  //         })
-  //       };
-  //       fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', tripRequest)
-  //         .then(response => response.json())
-  //         .then(() => {
-  //           this.getTravelerDestinationData(traveler)
-  //         })
-  //         .catch(error => console.log(error))
-  //     })
-  //     .catch(error => console.log(error))
-  // },
-  //
 
 export default fetcher;
