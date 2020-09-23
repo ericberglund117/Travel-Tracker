@@ -39,7 +39,6 @@ class Traveler {
       return this.id === trip.userID
     })
     tripMatch.forEach(trip => {
-      console.log(today)
       if (moment(trip.date, 'YYYY/MM/DD') < moment(today, 'YYYY/MM/DD')) {
       this.pastTrips.push(trip)
       }
@@ -54,7 +53,7 @@ class Traveler {
     })
     tripMatch.forEach(trip => {
       let currentYearTrips = moment(trip.date, 'YYYY/MM/DD');
-      if (moment(currentYearTrips).isBetween('2019-01-01', '2021-01-01') && trip.status === 'approved') {
+      if (moment(currentYearTrips).isBetween('2019-01-01', '2021-01-01')) {
         yearOfTrips.push(trip)
       }
     })

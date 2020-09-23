@@ -34,7 +34,7 @@ let domUpdates = {
       welcomeMsg)
   },
 
-  displayTravelerTrips(traveler, destinations) {
+  displayUpcomingTravelerTrips(traveler, destinations) {
     querySelectorNodes.bookedTripsCardsSection.innerHTML = '';
     let travelerPendingTrips = traveler.getPendingTrips(traveler.allTrips)
     travelerPendingTrips.forEach(trip => {
@@ -77,7 +77,7 @@ let domUpdates = {
  },
 
  displayPastTrips(traveler, destinations) {
-   let previousTrips = traveler.getPastTrips(traveler.allTrips)
+   let previousTrips = traveler.getPastTrips(traveler.allTrips, domUpdates.today)
    previousTrips.forEach(trip => {
        querySelectorNodes.travelerPastTrips.insertAdjacentHTML(`beforeend`,
          `<article class="trips-card-body" id="booked-trips-section"></article>
