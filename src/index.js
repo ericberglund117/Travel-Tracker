@@ -23,9 +23,12 @@ let selectedDestination;
 //____query selectors________
 
 let signInButton = document.querySelector(".sign-in-btn")
-let signInView = document.querySelector(".sign-in-view")
+let signInUsernameInput = document.getElementById("sign-in-input-username")
+let signInPasswordInput = document.getElementById("sign-in-input-password")
+let signInView = document.querySelector(".sign-in-view").style.display = "none";
 let bookedTripsCardsSection = document.querySelector(".trips-card-body")
-let travelerSection = document.querySelector(".left-section")
+let travelerPastTrips = document.querySelector(".past-trips")
+let travelerSection = document.querySelector(".left-section").style.display = 'block';
 let estimateButton = document.querySelector(".trip-estimate-btn")
 let submitTripButton = document.querySelector(".book-trip-btn")
 let currentTravelerLocation = document.querySelector(".current-location")
@@ -35,6 +38,8 @@ let numberOfTravelersInput = document.querySelector("#number-travelers-input")
 let tripDepartureDate = document.getElementById("#trip-date")
 let destinationsCards = document.querySelector(".sub-card-body")
 let departureDate = document.getElementById("trip-date")
+let confirmationMsg = document.querySelector(".confirmation-message")
+let loginButton = document.querySelector(".log-in-button")
 
 let querySelectorNodes = {
   signInButton,
@@ -49,7 +54,9 @@ let querySelectorNodes = {
   yearlyAmountSpent,
   numberOfTravelersInput,
   departureDate,
-  tripDepartureDate
+  tripDepartureDate,
+  travelerPastTrips,
+  confirmationMsg
 }
 
 //_________event listeners____________
@@ -69,6 +76,8 @@ window.addEventListener('load', (event) => {
 
 window.addEventListener('load', checkData)
 window.addEventListener('click', selectDestination)
+submitTripButton.addEventListener('click', makeTripRequest)
+signInButton.addEventListener('click', signIn)
 
 function getTravelerDestinationData(traveler) {
   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations')
@@ -145,6 +154,7 @@ function useFetchData(traveler) {
   domUpdates.displayTravelerTrips(traveler, traveler.allDestinations);
   domUpdates.displayAmountSpent(traveler, traveler.trips, traveler.allDestinations);
   domUpdates.displayDestinationCards(traveler);
+  domUpdates.displayPastTrips(traveler, traveler.allDestinations);
 }
 
 function selectDestination(event) {
@@ -156,19 +166,23 @@ function selectDestination(event) {
 function makeTripRequest() {
   if(moment(departureDate.value, 'YYYY/MM/DD', true).isValid() && selectedDestination) {
     travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, selectedDestination);
+    domUpdates.displayTripConfirmation()
+  } else {
+    domUpdates.displayTripError()
   }
 }
 
 function signIn(username, password) {
-  let modifiedUsername = username.split('traveler');
-  if(modifiedUsername[0] === ''
-     && parseInt(splitUsername[1]) > 0
-     && parseInt(splitUsername[1]) <= 50
-     && password === 'travel2020'
-   ) {
-     userID = parseInt(splitUsername[1]);
-     return true;
-   }
+  domUpdates.toggleViews()
+
  }
+
+function submitLogin() {
+  if (signIn(signInUsernameInput.value, signInPasswordInput.value)) {
+    getTravelerDestinationData(traveler, userID);
+    domUpdates.toggleMainView();
+  }
+}
+
 
 export default querySelectorNodes;
