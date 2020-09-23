@@ -18,6 +18,7 @@ let allDestinations;
 let traveler;
 let userID;
 let allData;
+let selectedDestination;
 
 //____query selectors________
 
@@ -33,6 +34,7 @@ let yearlyAmountSpent = document.getElementById("total-amount-spent-year")
 let numberOfTravelersInput = document.querySelector("#number-travelers-input")
 let tripDepartureDate = document.getElementById("#trip-date")
 let destinationsCards = document.querySelector(".sub-card-body")
+let departureDate = document.getElementById("trip-date")
 
 let querySelectorNodes = {
   signInButton,
@@ -46,6 +48,7 @@ let querySelectorNodes = {
   destinationsCards,
   yearlyAmountSpent,
   numberOfTravelersInput,
+  departureDate,
   tripDepartureDate
 }
 
@@ -65,6 +68,7 @@ window.addEventListener('load', (event) => {
 })
 
 window.addEventListener('load', checkData)
+window.addEventListener('click', selectDestination)
 
 function getTravelerDestinationData(traveler) {
   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/destinations/destinations')
@@ -136,12 +140,6 @@ function travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, sel
     .catch(error => console.log(error))
 }
 
-// function travelerInfoFetch(data) {
-//   let singleTravelerData = allData[0];
-//   let singleTravelerTripsData = allData[1];
-//   let singleTravelerDestinationData = allData[2];
-// }
-
 function useFetchData(traveler) {
   domUpdates.welcomeTraveler(traveler)
   domUpdates.displayTravelerTrips(traveler, traveler.allDestinations);
@@ -149,9 +147,16 @@ function useFetchData(traveler) {
   domUpdates.displayDestinationCards(traveler);
 }
 
+function selectDestination(event) {
+  if (event.target.classList.contains('destination-image')) {
+    selectedDestination = parseInt(event.target.id)
+  }
+}
 
 function makeTripRequest() {
-  travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, selectedDestination);
+  if(moment(departureDate.value, 'YYYY/MM/DD', true).isValid() && selectedDestination) {
+    travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, selectedDestination);
+  }
 }
 
 function signIn(username, password) {
