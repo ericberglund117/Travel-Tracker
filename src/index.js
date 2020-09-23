@@ -66,12 +66,6 @@ let querySelectorNodes = {
 // submitTripButton.addEventListener('click')
 // estimateButton.addEventListener('click')
 window.addEventListener('load', (event) => {
-  // let traveler1 = {
-  //   "id": 3,
-  //   "name": "Sibby Dawidowitsch",
-  //   "travelerType": "shopper"
-  // }
-  // traveler = new Traveler(traveler1)
   fetcher.getTravelerData(3)
 })
 
