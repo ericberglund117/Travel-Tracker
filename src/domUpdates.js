@@ -4,8 +4,16 @@ import Traveler from "./traveler"
 let domUpdates = {
 
   toggleViews() {
-    signInView.classList.toggle('hidden');
-    travelerSection.classList.toggle('hidden');
+    if(document.querySelector(".sign-in-view").style.display === 'none') {
+      document.querySelector(".sign-in-view").style.display = 'block';
+    } else {
+      document.querySelector(".sign-in-view").style.display = 'none'
+    }
+    if(document.querySelector(".left-section").style.display === 'block') {
+      document.querySelector(".left-section").style.display = 'none';
+    } else {
+      document.querySelector(".left-section").style.display = 'block'
+    }
   },
 
   welcomeTraveler(traveler) {
@@ -21,15 +29,16 @@ let domUpdates = {
   displayTravelerTrips(traveler, destinations) {
     querySelectorNodes.bookedTripsCardsSection.innerHTML = '';
     traveler.trips.forEach(trip => {
-      querySelectorNodes.bookedTripsCardsSection.insertAdjacentHTML(`beforeend`,
-        `<article class="trips-card-body" id="booked-trips-section"></article>
+      if(trip.status === 'pending' || 'approved') {
+        querySelectorNodes.bookedTripsCardsSection.insertAdjacentHTML(`beforeend`,
+          `<article class="trips-card-body" id="booked-trips-section"></article>
           <p>Destination: ${destinations[trip.destinationID - 1].destination}</p>
           <p>Travelers: ${trip.travelers}</p>
           <p>Date: ${trip.date}</p>
           <p>Status: ${trip.status}</p>
           <hr>
-        </article>`
-      );
+          </article>`
+        )};
     });
   },
 
@@ -48,6 +57,29 @@ let domUpdates = {
           </article>`
         )
    })
+ },
+
+ displayTripConfirmation() {
+   querySelectorNodes.confirmationMsg.innerHTML = '<h3>You have successfully booked your trip</h3>';
+ },
+
+ displayTripError() {
+   querySelectorNodes.confirmationMsg.innerHTML = '<h3>Please select a valid destination and date</h3>';
+ },
+
+ displayPastTrips(traveler, destinations) {
+   let previousTrips = traveler.getPastTrips(traveler.trips)
+   previousTrips.forEach(trip => {
+       querySelectorNodes.travelerPastTrips.insertAdjacentHTML(`beforeend`,
+         `<article class="trips-card-body" id="booked-trips-section"></article>
+         <p>Destination: ${destinations[trip.destinationID - 1].destination}</p>
+         <p>Travelers: ${trip.travelers}</p>
+         <p>Date: ${trip.date}</p>
+         <p>Status: ${trip.status}</p>
+         <hr>
+         </article>`
+       );
+   });
  }
 
 }
