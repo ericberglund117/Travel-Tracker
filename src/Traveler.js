@@ -1,4 +1,5 @@
 import moment from 'moment';
+import domUpdates from './domUpdates'
 
 class Traveler {
   constructor(traveler, trips) {
@@ -17,7 +18,7 @@ class Traveler {
         this.pendingTrips.push(trip)
       }
     })
-    return tripsData
+    return this.pendingTrips
   };
 
   getFutureTrips(tripsData) {
@@ -33,13 +34,13 @@ class Traveler {
     return this.futureTrips
   };
 
-  getPastTrips(tripsData) {
+  getPastTrips(tripsData, today) {
     let tripMatch = tripsData.filter(trip => {
       return this.id === trip.userID
     })
     tripMatch.forEach(trip => {
-      if (moment(trip.date, 'YYYY/MM/DD').fromNow().includes('ago') && trip.status ===
-    'approved') {
+      console.log(today)
+      if (moment(trip.date, 'YYYY/MM/DD') < moment(today, 'YYYY/MM/DD')) {
       this.pastTrips.push(trip)
       }
     })
