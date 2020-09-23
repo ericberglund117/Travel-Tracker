@@ -3,18 +3,28 @@ import Traveler from "./traveler"
 
 let domUpdates = {
 
-  toggleViews() {
-    if(document.querySelector(".sign-in-view").style.display === 'none' && document.querySelector(".main-page").style.display === 'block') {
-      document.querySelector(".sign-in-view").style.display = 'block';
-      document.querySelector(".main-page").style.display = 'none';
-    } else {
-      document.querySelector(".sign-in-view").style.display = 'none'
-      document.querySelector(".main-page").style.display = 'block'
-    }
+  // toggleViews() {
+  //   if(document.querySelector(".sign-in-view").style.display === 'none' && document.querySelector(".main-page").style.display === 'block') {
+  //     document.querySelector(".sign-in-view").style.display = 'block';
+  //     document.querySelector(".main-page").style.display = 'none';
+  //   } else {
+  //     document.querySelector(".sign-in-view").style.display = 'none'
+  //     document.querySelector(".main-page").style.display = 'block'
+  //   }
+  // },
+  traveler: {},
+  allTrips: [],
+  allDestinations: [],
+  today: '',
+
+  createIdentifiers(traveler, trips, destinations, todaysDate) {
+    domUpdates.traveler = traveler;
+    domUpdates.allTrips = trips;
+    domUpdates.allDestinations = destinations;
+    domUpdates.today = todaysDate;
   },
 
   welcomeTraveler(traveler) {
-    if(document.querySelector(".sign-in-view").style.display === 'none') {
       let firstName = traveler.name.split(" ")[0];
       let welcomeMsg = `
       <div class="welcome-msg">
@@ -22,15 +32,12 @@ let domUpdates = {
       </div>`;
       document.querySelector(".travel-tracker-header").insertAdjacentHTML("beforeend",
       welcomeMsg)
-    }
-    if (document.querySelector(".sign-in-view").style.display === 'block') {
-      document.querySelector(".travel-tracker-header").childNode.remove(".welcome-msg")
-    }
   },
 
   displayTravelerTrips(traveler, destinations) {
     querySelectorNodes.bookedTripsCardsSection.innerHTML = '';
-    traveler.trips.forEach(trip => {
+    let travelerPendingTrips = traveler.getPendingTrips(traveler.allTrips)
+    travelerPendingTrips.forEach(trip => {
       if(trip.status === 'pending' || 'approved') {
         querySelectorNodes.bookedTripsCardsSection.insertAdjacentHTML(`beforeend`,
           `<article class="trips-card-body" id="booked-trips-section"></article>
@@ -50,7 +57,7 @@ let domUpdates = {
  },
 
  displayDestinationCards(traveler) {
-   let allDestinations = traveler.allDestinations;
+   let allDestinations = domUpdates.allDestinations;
    allDestinations.forEach(destination => {
      querySelectorNodes.destinationsCards.insertAdjacentHTML('beforeend',
       `<article class="sub-sub-card" id="desinations-sub-card">
@@ -70,7 +77,7 @@ let domUpdates = {
  },
 
  displayPastTrips(traveler, destinations) {
-   let previousTrips = traveler.getPastTrips(traveler.trips)
+   let previousTrips = traveler.getPastTrips(traveler.allTrips)
    previousTrips.forEach(trip => {
        querySelectorNodes.travelerPastTrips.insertAdjacentHTML(`beforeend`,
          `<article class="trips-card-body" id="booked-trips-section"></article>
@@ -82,7 +89,12 @@ let domUpdates = {
          </article>`
        );
    });
- }
+ },
+
+ displayTripEstimation(trip, destination) {
+   let requestedTrip = new Trip(trip, destination);
+   querySelectorNodes.tripEstimation.innerText = `Estimated Trip Cost: ${requestedTrip.getTripCost()}`
+ },
 
 }
 
