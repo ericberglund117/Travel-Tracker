@@ -1,5 +1,6 @@
 import querySelectorNodes from "./index";
 import Traveler from "./traveler"
+import Trip from "./trip"
 
 let domUpdates = {
 

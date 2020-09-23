@@ -17,9 +17,8 @@ let allTravelerTrips;
 let tripData;
 let allDestinations;
 let traveler;
-let userID;
 let allData;
-let selectedDestination;
+let selectedDestinationId;
 
 //____query selectors________
 
@@ -33,8 +32,6 @@ let travelerPendingTrips = document.querySelector(".pending-trips")
 let travelerSection = document.querySelector(".left-section").style.display = 'block';
 let tripEstimation = document.querySelector(".trip-estimate")
 let submitTripButton = document.querySelector(".book-trip-btn")
-let currentTravelerLocation = document.querySelector(".current-location")
-let currentTravelerPendingTrips = document.querySelector(".pending-trips")
 let yearlyAmountSpent = document.getElementById("total-amount-spent-year")
 let numberOfTravelersInput = document.getElementById("number-travelers-input")
 let numberOfDaysInput = document.getElementById("number-days-input")
@@ -45,12 +42,10 @@ let loginButton = document.querySelector(".log-in-button")
 
 let querySelectorNodes = {
   signInButton,
-  signInView,
-  bookedTripsCardsSection,
-  travelerSection,
   submitTripButton,
-  currentTravelerLocation,
-  currentTravelerPendingTrips,
+  signInView,
+  travelerSection,
+  bookedTripsCardsSection,
   destinationsCards,
   yearlyAmountSpent,
   numberOfTravelersInput,
@@ -59,7 +54,8 @@ let querySelectorNodes = {
   confirmationMsg,
   tripEstimation,
   numberOfDaysInput,
-  travelerPendingTrips
+  travelerPendingTrips,
+  selectedDestinationId
 }
 
 //_________event listeners____________
@@ -78,14 +74,14 @@ signInButton.addEventListener('click', signIn)
 
 function selectDestination(event) {
   if (event.target.classList.contains('destination-image')) {
-    selectedDestination = parseInt(event.target.id)
+    selectedDestinationId = parseInt(event.target.id)
   }
 }
 
 function makeTripRequest() {
-  if(moment(departureDate.value, 'YYYY/MM/DD', true).isValid() && selectedDestination) {
-    travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, selectedDestination);
-    domUpdates.displayTripConfirmation()
+  console.log(tripDepartureDate.value)
+  if(moment(tripDepartureDate.value, 'YYYY-MM-DD') && selectedDestinationId) {
+    fetcher.travelerRequestedTripPost(selectedDestinationId);
   } else {
     domUpdates.displayTripError()
   }
