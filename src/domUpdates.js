@@ -38,9 +38,10 @@ let domUpdates = {
    querySelectorNodes.yearlyAmountSpent.innerHTML = (`<h3>You spent $${amountSpent} on traveling this year!</h3>`);
  },
 
- displayDestinationCards(travler) {
-   traveler.allDestinations.forEach(destination => {
-     destinationsCards.insertAdjacentHTML('beforeend',
+ displayDestinationCards(traveler) {
+   let allDestinations = traveler.allDestinations;
+   allDestinations.forEach(destination => {
+     querySelectorNodes.destinationsCards.insertAdjacentHTML('beforeend',
       `<article class="sub-sub-card" id="desinations-sub-card">
             <h3>${destination.destination}</h3>
             <input type="image" class="destination-image" id="${destination.id}" src="${destination.image}" alt="${destination.alt}"/>

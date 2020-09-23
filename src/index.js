@@ -29,10 +29,10 @@ let estimateButton = document.querySelector(".trip-estimate-btn")
 let submitTripButton = document.querySelector(".book-trip-btn")
 let currentTravelerLocation = document.querySelector(".current-location")
 let currentTravelerPendingTrips = document.querySelector(".pending-trips")
-let yearlyAmountSpent = document.querySelector(".total-amount-spent-year")
+let yearlyAmountSpent = document.getElementById("total-amount-spent-year")
 let numberOfTravelersInput = document.querySelector("#number-travelers-input")
-let tripDepartureDate = document.querySelector("#trip-date")
-let destinationsCards = document.querySelector("#destinations-body")
+let tripDepartureDate = document.getElementById("#trip-date")
+let destinationsCards = document.querySelector(".sub-card-body")
 
 let querySelectorNodes = {
   signInButton,
@@ -43,10 +43,10 @@ let querySelectorNodes = {
   submitTripButton,
   currentTravelerLocation,
   currentTravelerPendingTrips,
+  destinationsCards,
   yearlyAmountSpent,
   numberOfTravelersInput,
-  tripDepartureDate,
-  destinationsCards
+  tripDepartureDate
 }
 
 //_________event listeners____________
@@ -71,7 +71,7 @@ function getTravelerDestinationData(traveler) {
   .then((response) => response.json())
   .then(data => allDestinations = data.destinations)
   .then(getTravelerTrips(traveler))
-  .then(error => console.log(error));
+  .catch(error => console.log(error));
 }
 
 function getSingleTraveler(traveler) {
@@ -79,16 +79,14 @@ function getSingleTraveler(traveler) {
   .then((response) => response.json())
   .then(data => traveler = new Traveler(data))
   .then(getTravelerTrips(traveler))
-  .then(error => console.log(error));
+  .catch(error => console.log(error));
 }
 
 function getTravelerTrips(traveler) {
   let allTravelerTrips;
   return fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips')
   .then((response) => response.json())
-  .then(data => {
-    allTravelerTrips = data;
-  })
+  .then(data => allTravelerTrips = data)
   .then(() => {
     let travelerTrips = allTravelerTrips.trips.filter(trip => {
       return trip.userID === traveler.id;
@@ -97,11 +95,11 @@ function getTravelerTrips(traveler) {
     traveler.trips = travelerTrips;
     useFetchData(traveler)
   })
-  .then(error => console.log(error));
+  .catch(error => console.log(error));
 }
 
 function checkData() {
-  Promise.all([getSingleTraveler(traveler), getTravelerTrips(traveler), getTravelerDestinationData(traveler, userID)])
+  Promise.all([getSingleTraveler(traveler), getTravelerTrips(traveler), getTravelerDestinationData(traveler)])
   .then(data => console.log(allData))
   .catch(error => console.log(error));
 }
@@ -131,7 +129,7 @@ function travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, sel
       fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', tripRequest)
         .then(response => response.json())
         .then(() => {
-          getTravelerDestinationData(travler, userID)
+          getTravelerDestinationData(traveler)
         })
         .catch(error => console.log(error))
     })
@@ -145,9 +143,10 @@ function travelerRequestedTripPost(traveler, userID, numberOfTravelersInput, sel
 // }
 
 function useFetchData(traveler) {
+  domUpdates.welcomeTraveler(traveler)
   domUpdates.displayTravelerTrips(traveler, traveler.allDestinations);
-  domUpdates.displayamountSpent(traveler, traveler.Trips, traveler.AllDestinations);
-  domUpdates.displayDesinationCards(traveler);
+  domUpdates.displayAmountSpent(traveler, traveler.trips, traveler.allDestinations);
+  domUpdates.displayDestinationCards(traveler);
 }
 
 
