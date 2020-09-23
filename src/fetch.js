@@ -32,7 +32,7 @@ let fetcher = {
   useFetchData(traveler) {
     domUpdates.welcomeTraveler(traveler);
     domUpdates.displayDestinationCards(traveler);
-    domUpdates.displayTravelerTrips(traveler, domUpdates.allDestinations);
+    domUpdates.displayUpcomingTravelerTrips(traveler, domUpdates.allDestinations);
     domUpdates.displayAmountSpent(traveler, domUpdates.allTrips, domUpdates.allDestinations);
     domUpdates.displayPastTrips(traveler, domUpdates.allDestinations);
 
