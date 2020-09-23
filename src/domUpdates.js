@@ -100,7 +100,7 @@ let domUpdates = {
  },
 
  displayTripConfirmation() {
-   querySelectorNodes.confirmationMsg.innerHTML = '<h3>You have successfully booked your trip</h3>';
+   querySelectorNodes.confirmationMsg.innerHTML = '<h3>You have successfully booked your trip! It is now pending</h3>';
  },
 
  displayTripError() {
