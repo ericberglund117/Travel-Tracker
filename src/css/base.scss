@@ -8,7 +8,7 @@
 @import "./variables.scss";
 
 body {
-  display: grid;
+  display: block;
   background-color: $main-background-color;
   height: 100vh;
 }
@@ -28,8 +28,13 @@ button {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-trips {
+  @extend main;
+  justify-content: space-around;
 }
 
 h1 {
@@ -58,11 +63,12 @@ h1 {
 }
 
 .destinations {
-  grid-row: 4;
+  @extend main;
+  justify-content: center;
 }
 
 .destination-image {
-  width: 60%;
+  width: 30%;
 }
 
 .total-amount-spent-year {

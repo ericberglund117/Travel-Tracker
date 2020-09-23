@@ -1,13 +1,15 @@
 import moment from 'moment';
+import domUpdates from './domUpdates'
 
 class Traveler {
-  constructor(traveler) {
+  constructor(traveler, trips) {
     this.id = traveler.id;
     this.name = traveler.name;
     this.travelerType = traveler.travelerType;
     this.pendingTrips = [];
     this.pastTrips = [];
     this.futureTrips = [];
+    this.allTrips = trips;
   };
 
   getPendingTrips(tripsData) {
@@ -16,29 +18,27 @@ class Traveler {
         this.pendingTrips.push(trip)
       }
     })
-    return tripsData
+    return this.pendingTrips
   };
 
-  getFutureTrips(tripsData) {
+  getFutureTrips(tripsData, today) {
     let travelerTrips = tripsData.filter(trip => {
       return this.id === trip.userID
     })
     travelerTrips.forEach(trip => {
-      if (moment(trip.date, 'YYYY/MM/DD').fromNow().includes('in') && trip.status ===
-    'approved') {
+      if (moment(trip.date, 'YYYY/MM/DD') > moment(today, 'YYYY/MM/DD')) {
       this.futureTrips.push(trip)
     }
     })
     return this.futureTrips
   };
 
-  getPastTrips(tripsData) {
+  getPastTrips(tripsData, today) {
     let tripMatch = tripsData.filter(trip => {
       return this.id === trip.userID
     })
     tripMatch.forEach(trip => {
-      if (moment(trip.date, 'YYYY/MM/DD').fromNow().includes('ago') && trip.status ===
-    'approved') {
+      if (moment(trip.date, 'YYYY/MM/DD') < moment(today, 'YYYY/MM/DD')) {
       this.pastTrips.push(trip)
       }
     })
@@ -52,7 +52,7 @@ class Traveler {
     })
     tripMatch.forEach(trip => {
       let currentYearTrips = moment(trip.date, 'YYYY/MM/DD');
-      if (moment(currentYearTrips).isBetween('2019-01-01', '2021-01-01') && trip.status === 'approved') {
+      if (moment(currentYearTrips).isBetween('2019-01-01', '2021-01-01')) {
         yearOfTrips.push(trip)
       }
     })
@@ -69,5 +69,4 @@ class Traveler {
     return Math.round(yearlyCostEstimation * 1.1)
   };
 }
-
 export default Traveler;

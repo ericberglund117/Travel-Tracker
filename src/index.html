@@ -27,7 +27,7 @@
       <section class="left-section hidden">
         <form id="book-trip-form"
             role="search">
-            <h2>Book a Trip!</h2>
+            <h2>Book a Trip! Click the destination of your choice and fill out the form below</h2>
             <label for="date-picker">
               Departure Date
               <input id="trip-date"
@@ -47,6 +47,7 @@
               autocomplete="off"></input>
             </label>
             <div class="trip-estimate">
+              <h2>Estimated Trip Cost: </h2>
             </div>
         <button class="book-trip-btn"
                 type="button"
@@ -58,19 +59,24 @@
       <section class="total-amount-spent-year" id="total-amount-spent-year">
         <h2>Amount Spent on Trips</h2>
       </section>
-      <section class="upcoming-trips hidden">
-        <h2>Upcoming Trips</h2>
-        <article class="trips-card-body" id="booked-trips-section">
-        </article>
-      </section>
-      <section class="past-trips hidden">
-        <h2>Past Trips</h2>
-      </section>
-      <section class="confirmation-message" id="confirmation-message"></section>
-      <section class="destinations hidden">
-        <h2>Destinations</h2>
-        <article class="sub-card-body" id="desinations-body">
-        </article>
+      <section class="main-trips">
+        <section class="upcoming-trips hidden">
+          <h2>Upcoming Trips</h2>
+          <article class="trips-card-body" id="booked-trips-section">
+          </article>
+        </section>
+        <section class="pending-trips hidden">
+          <h2>Pending Trips</h2>
+        </section>
+        <section class="past-trips hidden">
+          <h2>Past Trips</h2>
+        </section>
+        <section class="confirmation-message" id="confirmation-message"></section>
+        <section class="destinations hidden">
+          <h2>Destinations</h2>
+          <article class="sub-card-body" id="desinations-body">
+          </article>
+        </section>
       </section>
     </main>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
