@@ -4,15 +4,12 @@ import Traveler from "./traveler"
 let domUpdates = {
 
   toggleViews() {
-    if(document.querySelector(".sign-in-view").style.display === 'none') {
+    if(document.querySelector(".sign-in-view").style.display === 'none' && document.querySelector(".main-page").style.display === 'flex') {
       document.querySelector(".sign-in-view").style.display = 'block';
+      document.querySelector(".main-page").style.display = 'none';
     } else {
       document.querySelector(".sign-in-view").style.display = 'none'
-    }
-    if(document.querySelector(".left-section").style.display === 'block') {
-      document.querySelector(".left-section").style.display = 'none';
-    } else {
-      document.querySelector(".left-section").style.display = 'block'
+      document.querySelector(".main-page").style.display = 'flex'
     }
   },
 
