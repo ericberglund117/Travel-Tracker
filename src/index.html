@@ -13,13 +13,13 @@
     <section class="sign-in-view" id="sign-in-view">
       <article class="sign-in-flex" id="sign-in-grid">
         <article class="header" id="sign-in-header">
-          <h3>Login with your email address and password to continue</h3>
+          <h2>Login with your email address and password to continue</h2>
         </article>
           <input class="sign-in-input" id="sign-in-input-username" type="text" placeholder="username">
           <input class="sign-in-input" id="sign-in-input-password" type="password" placeholder="password">
           <button class="log-in-button" id="log-in-button">Login</button>
         <article class="footer hidden" id="sign-in-footer">
-          <h3>Incorrect login. Please try again.</h3>
+          <h2>Incorrect login. Please try again.</h2>
         </article>
       </article>
     </section>
@@ -27,50 +27,48 @@
       <section class="left-section hidden">
         <form id="book-trip-form"
             role="search">
-            <h3>Book a Trip!</h3>
+            <h2>Book a Trip!</h2>
             <label for="date-picker">
               Departure Date
+              <input id="trip-date"
+              type="date"
+              autocomplete="off"></input>
             </label>
-        <input id="trip-date"
-               type="date"
-               autocomplete="off"></input>
              <label for="number-days">
                Number of Days
+               <input id="number-days-input"
+               type="number"
+               autocomplete="off"></input>
              </label>
-        <input id="number-days-input"
+            <label for="number-travelers">
+              Number of Travelers
+              <input id="number-travelers-input"
               type="number"
               autocomplete="off"></input>
-            <label for="number-days">
-              Number of Travelers
             </label>
-      <input id="number-travelers-input"
-             type="number"
-             autocomplete="off"></input>
             <div class="trip-estimate">
             </div>
         <button class="book-trip-btn"
                 type="button"
-                name="button"
-                aria-label="Submit trip request"
-                aria-controls="search-input">
+                name="button">
           Submit
         </button>
       </form>
       </section>
       <section class="total-amount-spent-year" id="total-amount-spent-year">
-        <h3>Amount Spent on Trips</h3>
+        <h2>Amount Spent on Trips</h2>
       </section>
       <section class="upcoming-trips hidden">
-        <h3>Upcoming Trips</h3>
+        <h2>Upcoming Trips</h2>
         <article class="trips-card-body" id="booked-trips-section">
         </article>
       </section>
       <section class="past-trips hidden">
-        <h3>Past Trips</h3>
+        <h2>Past Trips</h2>
       </section>
       <section class="confirmation-message" id="confirmation-message"></section>
       <section class="destinations hidden">
-        <h3>Destinations</h3>
+        <h2>Destinations</h2>
         <article class="sub-card-body" id="desinations-body">
         </article>
       </section>
