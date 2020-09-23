@@ -36,8 +36,8 @@ let domUpdates = {
 
   displayUpcomingTravelerTrips(traveler, destinations) {
     querySelectorNodes.bookedTripsCardsSection.innerHTML = '';
-    let travelerPendingTrips = traveler.getPendingTrips(traveler.allTrips)
-    travelerPendingTrips.forEach(trip => {
+    let travelerFutureTrips = traveler.getFutureTrips(traveler.allTrips, domUpdates.today)
+    travelerFutureTrips.forEach(trip => {
       if(trip.status === 'pending' || 'approved') {
         querySelectorNodes.bookedTripsCardsSection.insertAdjacentHTML(`beforeend`,
           `<article class="trips-card-body" id="booked-trips-section"></article>
@@ -48,6 +48,36 @@ let domUpdates = {
           <hr>
           </article>`
         )};
+    });
+  },
+
+  displayPastTrips(traveler, destinations) {
+    let previousTrips = traveler.getPastTrips(traveler.allTrips, domUpdates.today)
+    previousTrips.forEach(trip => {
+        querySelectorNodes.travelerPastTrips.insertAdjacentHTML(`beforeend`,
+          `<article class="trips-card-body" id="booked-trips-section"></article>
+          <p>Destination: ${destinations[trip.destinationID - 1].destination}</p>
+          <p>Travelers: ${trip.travelers}</p>
+          <p>Date: ${trip.date}</p>
+          <p>Status: ${trip.status}</p>
+          <hr>
+          </article>`
+        );
+    });
+  },
+
+  displayPendingTrips(traveler, destinations) {
+    let previousTrips = traveler.getPendingTrips(traveler.allTrips)
+    previousTrips.forEach(trip => {
+        querySelectorNodes.travelerPendingTrips.insertAdjacentHTML(`beforeend`,
+          `<article class="trips-card-body" id="booked-trips-section"></article>
+          <p>Destination: ${destinations[trip.destinationID - 1].destination}</p>
+          <p>Travelers: ${trip.travelers}</p>
+          <p>Date: ${trip.date}</p>
+          <p>Status: ${trip.status}</p>
+          <hr>
+          </article>`
+        );
     });
   },
 
@@ -74,21 +104,6 @@ let domUpdates = {
 
  displayTripError() {
    querySelectorNodes.confirmationMsg.innerHTML = '<h3>Please select a valid destination and date</h3>';
- },
-
- displayPastTrips(traveler, destinations) {
-   let previousTrips = traveler.getPastTrips(traveler.allTrips, domUpdates.today)
-   previousTrips.forEach(trip => {
-       querySelectorNodes.travelerPastTrips.insertAdjacentHTML(`beforeend`,
-         `<article class="trips-card-body" id="booked-trips-section"></article>
-         <p>Destination: ${destinations[trip.destinationID - 1].destination}</p>
-         <p>Travelers: ${trip.travelers}</p>
-         <p>Date: ${trip.date}</p>
-         <p>Status: ${trip.status}</p>
-         <hr>
-         </article>`
-       );
-   });
  },
 
  displayTripEstimation(trip, destination) {

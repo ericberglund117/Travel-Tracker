@@ -29,6 +29,7 @@ let signInPasswordInput = document.getElementById("sign-in-input-password")
 let signInView = document.querySelector(".sign-in-view").style.display = "none";
 let bookedTripsCardsSection = document.querySelector(".trips-card-body")
 let travelerPastTrips = document.querySelector(".past-trips")
+let travelerPendingTrips = document.querySelector(".pending-trips")
 let travelerSection = document.querySelector(".left-section").style.display = 'block';
 let tripEstimation = document.querySelector(".trip-estimate")
 let submitTripButton = document.querySelector(".book-trip-btn")
@@ -57,7 +58,8 @@ let querySelectorNodes = {
   travelerPastTrips,
   confirmationMsg,
   tripEstimation,
-  numberOfDaysInput
+  numberOfDaysInput,
+  travelerPendingTrips
 }
 
 //_________event listeners____________

@@ -35,7 +35,7 @@ let fetcher = {
     domUpdates.displayUpcomingTravelerTrips(traveler, domUpdates.allDestinations);
     domUpdates.displayAmountSpent(traveler, domUpdates.allTrips, domUpdates.allDestinations);
     domUpdates.displayPastTrips(traveler, domUpdates.allDestinations);
-
+    domUpdates.displayPendingTrips(traveler, domUpdates.allDestinations);
   },
 
   travelerRequestedTripPost() {

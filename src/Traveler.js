@@ -21,13 +21,12 @@ class Traveler {
     return this.pendingTrips
   };
 
-  getFutureTrips(tripsData) {
+  getFutureTrips(tripsData, today) {
     let travelerTrips = tripsData.filter(trip => {
       return this.id === trip.userID
     })
     travelerTrips.forEach(trip => {
-      if (moment(trip.date, 'YYYY/MM/DD').fromNow().includes('in') && trip.status ===
-    'approved') {
+      if (moment(trip.date, 'YYYY/MM/DD') > moment(today, 'YYYY/MM/DD')) {
       this.futureTrips.push(trip)
     }
     })
