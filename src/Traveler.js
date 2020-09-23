@@ -1,13 +1,14 @@
 import moment from 'moment';
 
 class Traveler {
-  constructor(traveler) {
+  constructor(traveler, trips) {
     this.id = traveler.id;
     this.name = traveler.name;
     this.travelerType = traveler.travelerType;
     this.pendingTrips = [];
     this.pastTrips = [];
     this.futureTrips = [];
+    this.allTrips = trips;
   };
 
   getPendingTrips(tripsData) {
@@ -69,5 +70,4 @@ class Traveler {
     return Math.round(yearlyCostEstimation * 1.1)
   };
 }
-
 export default Traveler;
