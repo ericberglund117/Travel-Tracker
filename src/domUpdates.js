@@ -4,23 +4,28 @@ import Traveler from "./traveler"
 let domUpdates = {
 
   toggleViews() {
-    if(document.querySelector(".sign-in-view").style.display === 'none' && document.querySelector(".main-page").style.display === 'flex') {
+    if(document.querySelector(".sign-in-view").style.display === 'none' && document.querySelector(".main-page").style.display === 'block') {
       document.querySelector(".sign-in-view").style.display = 'block';
       document.querySelector(".main-page").style.display = 'none';
     } else {
       document.querySelector(".sign-in-view").style.display = 'none'
-      document.querySelector(".main-page").style.display = 'flex'
+      document.querySelector(".main-page").style.display = 'block'
     }
   },
 
   welcomeTraveler(traveler) {
-    let firstName = traveler.name.split(" ")[0];
-    let welcomeMsg = `
+    if(document.querySelector(".sign-in-view").style.display === 'none') {
+      let firstName = traveler.name.split(" ")[0];
+      let welcomeMsg = `
       <div class="welcome-msg">
-        <h1>Welcome ${firstName}!</h1>
+      <h1>Welcome ${firstName}!</h1>
       </div>`;
-    document.querySelector(".travel-tracker-header").insertAdjacentHTML("beforeend",
-    welcomeMsg)
+      document.querySelector(".travel-tracker-header").insertAdjacentHTML("beforeend",
+      welcomeMsg)
+    }
+    if (document.querySelector(".sign-in-view").style.display === 'block') {
+      document.querySelector(".travel-tracker-header").childNode.remove(".welcome-msg")
+    }
   },
 
   displayTravelerTrips(traveler, destinations) {
