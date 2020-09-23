@@ -68,20 +68,6 @@ class Traveler {
     }, 0)
     return Math.round(yearlyCostEstimation * 1.1)
   };
-
-  // makeTripRequest(trip) {
-  //   return window
-  //     .fetch('https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(trip)
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => console.log(data))
-  //     .catch(error => console.log(error.message))
-  // };
 }
 
 export default Traveler;
