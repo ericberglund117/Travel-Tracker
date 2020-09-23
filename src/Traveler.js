@@ -8,7 +8,7 @@ class Traveler {
     this.pendingTrips = [];
     this.pastTrips = [];
     this.futureTrips = [];
-  }
+  };
 
   getPendingTrips(tripsData) {
     tripsData.forEach(trip => {
@@ -17,7 +17,7 @@ class Traveler {
       }
     })
     return tripsData
-  }
+  };
 
   getFutureTrips(tripsData) {
     let travelerTrips = tripsData.filter(trip => {
@@ -30,7 +30,7 @@ class Traveler {
     }
     })
     return this.futureTrips
-  }
+  };
 
   getPastTrips(tripsData) {
     let tripMatch = tripsData.filter(trip => {
@@ -43,7 +43,7 @@ class Traveler {
       }
     })
     return this.pastTrips
-  }
+  };
 
   getAmountSpent(tripsData, destinationData) {
     let yearOfTrips = [];
@@ -67,7 +67,7 @@ class Traveler {
       return totalCost
     }, 0)
     return Math.round(yearlyCostEstimation * 1.1)
-  }
+  };
 }
 
 export default Traveler;
