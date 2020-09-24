@@ -24,6 +24,9 @@ In your terminal:
 ## TRAVELER PAGE VIEW
 <img src="src/images/travelerpage.png" alt="app main page view" width="600">
 
+## TRAVELER TRIP REQUEST PAGE VIEW
+<img src="src/images/travelrequesttrip.png" alt="app main page view" width="600">
+
 ## DESTINATIONS VIEW
 <img src="src/images/destinationspage.png" alt="app main page view" width="600">
 
