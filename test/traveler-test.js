@@ -7,8 +7,10 @@ describe('Travler', function() {
   let traveler2;
   let tripInfo;
   let destinationInfo;
+  let today;
 
   beforeEach(function() {
+    today = '2020-09-23'
     travelerInfo = [
       {
       "id": 1,
@@ -120,14 +122,14 @@ describe('Travler', function() {
 
     describe('getFutureTrips', function() {
       it(`should be able to get a traveler's future trips`, function() {
-        traveler1.getFutureTrips(tripInfo)
-        expect(traveler1.futureTrips).to.deep.equal([tripInfo[1]])
+        traveler1.getFutureTrips(tripInfo, today)
+        expect(traveler1.futureTrips).to.deep.equal([tripInfo[1], tripInfo[2]])
       })
     })
 
     describe('getPastTrips', function() {
       it(`should be able to get a traveler's past trips`, function() {
-        traveler1.getPastTrips(tripInfo)
+        traveler1.getPastTrips(tripInfo, today)
         expect(traveler1.pastTrips).to.deep.equal([tripInfo[0]])
       })
     })
@@ -135,7 +137,7 @@ describe('Travler', function() {
     describe('getAmountSpent', function() {
       it('should be able to calculate how much a traveler has spent on trips over a year', function() {
         traveler1.getAmountSpent(tripInfo, destinationInfo)
-        expect(traveler1.getAmountSpent(tripInfo, destinationInfo)).to.equal(2541)
+        expect(traveler1.getAmountSpent(tripInfo, destinationInfo)).to.equal(5401)
       })
     })
   })

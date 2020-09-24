@@ -52,7 +52,7 @@ let fetcher = {
       .catch(error => console.log(error))
       } else {
         domUpdates.displayTripError()
-      }
+      };
     },
 
   createTrip(destinationIdentification){
@@ -75,6 +75,6 @@ let fetcher = {
       return requestedTrip
     }
   }
-}
+};
 
 export default fetcher;
