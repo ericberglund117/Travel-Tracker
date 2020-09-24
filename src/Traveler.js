@@ -1,5 +1,5 @@
 import moment from 'moment';
-import domUpdates from './domUpdates'
+//import domUpdates from './domUpdates'
 
 class Traveler {
   constructor(traveler, trips) {

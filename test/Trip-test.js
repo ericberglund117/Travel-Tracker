@@ -30,8 +30,8 @@ describe('Trip', function() {
       "suggestedActivities": []
       },
     ];
-    trip = new Trip(tripInfo[1])
-    destinationInfo = destinationInfo = [
+    trip = new Trip(tripInfo[1], destinationInfo)
+    destinationInfo = [
       {
       "id": 25,
       "destination": "Paris, France",
@@ -87,7 +87,7 @@ describe('Trip', function() {
 
   describe('getTripCost', function() {
     it('should be able to calculate the cost of a trip request', function() {
-      expect(trip.getTripCost(destinationInfo)).to.equal(1485)
+      expect(trip.getTripCost()).to.equal(1485)
     });
-  })
-})
+  });
+});

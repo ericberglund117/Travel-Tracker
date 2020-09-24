@@ -3,16 +3,6 @@ import Traveler from "./traveler"
 import Trip from "./trip"
 
 let domUpdates = {
-
-  // toggleViews() {
-  //   if(document.querySelector(".sign-in-view").style.display === 'none' && document.querySelector(".main-page").style.display === 'block') {
-  //     document.querySelector(".sign-in-view").style.display = 'block';
-  //     document.querySelector(".main-page").style.display = 'none';
-  //   } else {
-  //     document.querySelector(".sign-in-view").style.display = 'none'
-  //     document.querySelector(".main-page").style.display = 'block'
-  //   }
-  // },
   traveler: {},
   allTrips: [],
   allDestinations: [],
@@ -112,6 +102,6 @@ let domUpdates = {
    querySelectorNodes.tripEstimation.innerText = `Estimated Trip Cost: ${requestedTrip.getTripCost()}`
  },
 
-}
+};
 
 export default domUpdates;
