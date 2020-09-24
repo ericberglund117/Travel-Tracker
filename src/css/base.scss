@@ -32,14 +32,19 @@ main {
   flex-wrap: wrap;
 }
 
+h1 {
+  margin-left: 1em;
+}
+
+.hidden {
+  display: none;
+}
+
 .main-trips {
   @extend main;
   justify-content: space-around;
 }
 
-h1 {
-  margin-left: 1em;
-}
 
 .sign-in-btn {
   margin: 1em;

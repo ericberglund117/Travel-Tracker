@@ -22,14 +22,14 @@ let selectedDestinationId;
 
 //____query selectors________
 
-let signInButton = document.querySelector(".sign-in-btn")
+let logInButton = document.querySelector(".log-in-button")
 let signInUsernameInput = document.getElementById("sign-in-input-username")
 let signInPasswordInput = document.getElementById("sign-in-input-password")
-let signInView = document.querySelector(".sign-in-view").style.display = "none";
+let signInView = document.querySelector(".sign-in-view");
 let bookedTripsCardsSection = document.querySelector(".trips-card-body")
 let travelerPastTrips = document.querySelector(".past-trips")
 let travelerPendingTrips = document.querySelector(".pending-trips")
-let travelerSection = document.querySelector(".left-section").style.display = 'block';
+let travelerSection = document.querySelector(".left-section");
 let tripEstimation = document.querySelector(".trip-estimate")
 let submitTripButton = document.querySelector(".book-trip-btn")
 let yearlyAmountSpent = document.getElementById("total-amount-spent-year")
@@ -39,11 +39,10 @@ let tripDepartureDate = document.getElementById("trip-date")
 let destinationsCards = document.querySelector(".sub-card-body")
 let confirmationMsg = document.querySelector(".confirmation-message")
 let loginButton = document.querySelector(".log-in-button")
+let mainPage = document.querySelector(".main-page")
 
 let querySelectorNodes = {
-  signInButton,
   submitTripButton,
-  signInView,
   travelerSection,
   bookedTripsCardsSection,
   destinationsCards,
@@ -64,13 +63,13 @@ let querySelectorNodes = {
 // submitTripButton.addEventListener('click')
 // estimateButton.addEventListener('click')
 window.addEventListener('load', (event) => {
-  fetcher.getTravelerData(3)
+  //fetcher.getTravelerData(3)
 })
 
-window.addEventListener('load', fetcher.checkData)
+
 window.addEventListener('click', selectDestination)
 submitTripButton.addEventListener('click', makeTripRequest)
-signInButton.addEventListener('click', signIn)
+logInButton.addEventListener('click', submitLogin)
 
 function selectDestination(event) {
   if (event.target.classList.contains('destination-image')) {
@@ -87,15 +86,12 @@ function makeTripRequest() {
   }
 }
 
-function signIn(username, password) {
-  domUpdates.toggleViews()
-
- }
-
 function submitLogin() {
-  if (signIn(signInUsernameInput.value, signInPasswordInput.value)) {
-    getTravelerDestinationData(traveler, userID);
-    domUpdates.toggleMainView();
+  if (signInUsernameInput.value.includes('traveler') && signInPasswordInput.value === 'travel2020') {
+    let identifier = parseInt(signInUsernameInput.value.split('traveler')[1])
+    signInView.classList.add('hidden')
+    mainPage.classList.remove('hidden')
+    fetcher.getTravelerData(identifier);
   }
 }
 
