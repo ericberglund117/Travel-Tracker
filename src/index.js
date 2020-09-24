@@ -57,7 +57,6 @@ function selectDestination(event) {
 };
 
 function makeTripRequest() {
-  console.log(tripDepartureDate.value)
   if(moment(tripDepartureDate.value, 'YYYY-MM-DD') && selectedDestinationId) {
     fetcher.travelerRequestedTripPost(selectedDestinationId);
   } else {

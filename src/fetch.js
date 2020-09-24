@@ -61,12 +61,13 @@ let fetcher = {
         return destination.id === destinationIdentification
       });
       let mostRecentTripRequest = domUpdates.allTrips.pop();
+      let dateString = moment(querySelectorNodes.tripDepartureDate.value).format("YYYY/MM/DD")
       let requestedTrip = {
         id: mostRecentTripRequest.id + 4,
         userID: parseInt(domUpdates.traveler.id),
         destinationID: parseInt(requestedDestination.id),
         travelers: parseInt(querySelectorNodes.numberOfTravelersInput.value),
-        date: moment(querySelectorNodes.tripDepartureDate, 'YYYY-MM-DD'),
+        date: dateString,
         duration: parseInt(querySelectorNodes.numberOfDaysInput.value),
         status: 'pending',
         suggestedActivities: []
